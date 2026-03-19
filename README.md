@@ -125,7 +125,7 @@ ros2 launch go2_config gazebo_velodyne.launch.py rviz:=true
 This configuration loads both the Velodyne Lidar and the front-facing camera.
 
 ```bash
-ros2 launch go2_config gazebo_sensors.launch.py rviz:=true
+ros2 launch go2_config gazebo.launch.py rviz:=true
 ```
 
 > Note: Use the **`robot.rviz`** configuration provided in the `champ_description` package for the best visualization of both sensors.
