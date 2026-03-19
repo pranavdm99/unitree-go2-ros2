@@ -27,14 +27,21 @@ def generate_launch_description():
     descr_pkg_share = launch_ros.substitutions.FindPackageShare(
         package="go2_description"
     ).find("go2_description")
+    
     joints_config = os.path.join(config_pkg_share, "config/joints/joints.yaml")
     ros_control_config = os.path.join(
-        config_pkg_share, "/config/ros_control/ros_control.yaml"
+        config_pkg_share, "config/ros_control/ros_control.yaml"
     )
     gait_config = os.path.join(config_pkg_share, "config/gait/gait.yaml")
     links_config = os.path.join(config_pkg_share, "config/links/links.yaml")
-    default_model_path = os.path.join(descr_pkg_share, "xacro/robot.xacro")
+    
+    # Use the new robot_sensors.xacro
+    default_model_path = os.path.join(descr_pkg_share, "xacro/robot_sensors.xacro")
     default_world_path = os.path.join(config_pkg_share, "worlds/default.world")
+    
+    rviz_config_path = os.path.join(
+        get_package_share_directory("champ_description"), "rviz", "robot.rviz"
+    )
 
     declare_use_sim_time = DeclareLaunchArgument(
         "use_sim_time",
@@ -88,6 +95,7 @@ def generate_launch_description():
             "gazebo": "true",
             "lite": LaunchConfiguration("lite"),
             "rviz": LaunchConfiguration("rviz"),
+            "rviz_path": rviz_config_path,
             "joint_controller_topic": "joint_group_effort_controller/joint_trajectory",
             "hardware_connected": "false",
             "publish_foot_contacts": "false",
@@ -113,6 +121,7 @@ def generate_launch_description():
             "world_init_z": LaunchConfiguration("world_init_z"),
             "world_init_heading": LaunchConfiguration("world_init_heading"),
             "gui": LaunchConfiguration("gui"),
+            "ros_control_file": LaunchConfiguration("ros_control_file"),
             "close_loop_odom": "true",
         }.items(),
     )
