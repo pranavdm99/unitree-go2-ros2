@@ -1,5 +1,8 @@
 # unitree go2 ros2 - champ config
 
+> [!NOTE]
+> This repository is a fork of the [anujjain-dev/unitree-go2-ros2](https://github.com/anujjain-dev/unitree-go2-ros2) project. We gratefully acknowledge the work of Anuj Jain, as well as the original creators at [Unitree Robotics](https://github.com/unitreerobotics/unitree_ros) and the [CHAMP](https://github.com/chvmp/champ) project.
+
 > This package contains the configuration files for the Unitree Go2 robot configured with the CHAMP controller in ROS 2 (humble). It includes development of config package along with upgrade in robot description model for ROS 2 Humble distribution.
 
 ## Unitree Go2:
@@ -37,10 +40,19 @@
 - &check; Working Gazebo with teleoperated robot.
 - &check; Adding IMU and 2D LiDAR.
 - &check; Adding 3D LiDAR (Velodyne).
+- &check; Adding Front Camera.
 - &cross; Working Gazebo demo with SLAM.
 - &cross; Working Gazebo demo with nav2 integration.
 
-## 1. Installation
+## 1. Development Environment (Recommended)
+
+This project supports **VS Code Dev Containers**, which automates the setup of all ROS2 Humble and project-specific dependencies (including Clang-18 and system tools).
+
+1.  Open the project folder in VS Code.
+2.  Install the **"Dev Containers"** extension (by Microsoft).
+3.  Click the green icon in the bottom-left corner and select **"Reopen in Container"**.
+
+## 2. Manual Installation
 
 ### 1.0 Install ROS-based dependencies:
 ```bash
@@ -109,6 +121,15 @@ ros2 launch go2_config gazebo_velodyne.launch.py rviz:=true
 
 ![Go2 Velodyne Gazebo RViz Launch](.docs/gazebo_velodyne_rviz_launch.png)
 
+### 2.7 Go2 Full Sensors (Lidar + Camera) demo:
+This configuration loads both the Velodyne Lidar and the front-facing camera.
+
+```bash
+ros2 launch go2_config gazebo_sensors.launch.py rviz:=true
+```
+
+> Note: Use the **`robot.rviz`** configuration provided in the `champ_description` package for the best visualization of both sensors.
+
 ### 2.6 Go2 Hokoyu 2D LiDAR Config Gazbeo demo: Run the Gazebo environment
 
 > NOTE: To use Laser instead of 3D Velodyne LiDAR, comment `<xacro:include filename="$(find go2_description)/xacro/velodyne.xacro"/>` and uncomment `<xacro:include filename="$(find go2_description)/xacro/laser.xacro"/>` in `robot_VLP.xacro` file located inside `robots/description/go2_description/xacro/` folder.
@@ -162,6 +183,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This project builds upon and incorporates work from the following projects:
 
+* [Anuj Jain](https://github.com/anujjain-dev/unitree-go2-ros2) - For the base Unitree Go2 ROS 2 Humble configuration.
 * [Unitree Robotics](https://github.com/unitreerobotics/unitree_ros) - For the Go2 robot description (URDF model).
 * [CHAMP](https://github.com/chvmp/champ) - For the quadruped controller framework.
 * [CHAMP Robots](https://github.com/chvmp/robots) - For robot configurations and setup examples.
