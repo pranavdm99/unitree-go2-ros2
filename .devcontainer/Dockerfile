@@ -3,7 +3,7 @@ FROM osrf/ros:humble-desktop
 USER root
 
 # Install basic tools
-RUN apt update && apt install -y git wget curl software-properties-common lsb-release gnupg
+RUN apt update && apt install -y git wget curl software-properties-common lsb-release gnupg xterm
 
 # Install clang tools
 RUN wget https://apt.llvm.org/llvm.sh && chmod +x llvm.sh && ./llvm.sh 18 all
